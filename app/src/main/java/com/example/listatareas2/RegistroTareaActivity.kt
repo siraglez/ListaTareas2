@@ -1,6 +1,5 @@
 package com.example.listatareas2
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -32,8 +31,10 @@ class RegistroTareaActivity : AppCompatActivity() {
 
             if (nombre.isNotEmpty() && descripcion.isNotEmpty() && fecha.isNotEmpty() && prioridad.isNotEmpty() && coste != null) {
                 val tarea = Tarea(nombre, descripcion, fecha, prioridad, coste)
-                val resultIntent = Intent().apply { putExtra("nuevaTarea", tarea) }
-                setResult(Activity.RESULT_OK, resultIntent)
+                val resultIntent = Intent().apply {
+                    putExtra("nuevaTarea", tarea)
+                }
+                setResult(RESULT_OK, resultIntent)
                 finish()
             } else {
                 Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
