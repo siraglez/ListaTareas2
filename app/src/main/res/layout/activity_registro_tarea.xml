@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="8dp"
+        android:text="@string/registro_name"
+        android:textColor="#5E35B1"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etNombre"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Nombre"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/etDescripcion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Descripción"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/etFecha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Fecha (dd/mm/yyyy)"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/etPrioridad"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Prioridad"
+        android:minHeight="48dp" />
+
+    <EditText
+        android:id="@+id/etCoste"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Coste"
+        android:minHeight="48dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/btnRegistrar"
+            style="@style/BottomButtonStyle"
+            android:text="@string/register_button"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp" />
+
+        <Button
+            android:id="@+id/btnCancelar"
+            style="@style/BottomButtonStyle"
+            android:text="@string/cancel_button"
+            android:layout_weight="1" />
+    </LinearLayout>
+</LinearLayout>
