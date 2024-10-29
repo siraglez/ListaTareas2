@@ -49,11 +49,10 @@ class ListadoTareasActivity : AppCompatActivity() {
         listViewTareas.setOnItemClickListener { _, _, position, _ ->
             val tarea = listaTareas[position]
             val intent = Intent(this, DetallesTareaActivity::class.java).apply {
-                putExtra("tarea", tarea)
+                putExtra("tarea", tarea) // Pasamos el objeto tarea
             }
-            startActivity(intent)
+            startActivityForResult(intent, REQUEST_CODE_DETALLES)
         }
-
     }
 
     private fun mostrarTareas(tareas: List<Tarea>) {
@@ -71,10 +70,18 @@ class ListadoTareasActivity : AppCompatActivity() {
                 listaTareas.add(it)
                 mostrarTareas(listaTareas)
             } ?: Toast.makeText(this, "No se recibió la nueva tarea", Toast.LENGTH_SHORT).show()
+        } else if (requestCode == REQUEST_CODE_DETALLES && resultCode == Activity.RESULT_OK) {
+            val tareaModificada = data?.getParcelableExtra<Tarea>("tarea") // Recibe la tarea modificada
+            tareaModificada?.let {
+                // Busca la tarea en la lista y actualiza su estado
+                listaTareas.find { t -> t.nombre == it.nombre }?.hecha = true
+                mostrarTareas(listaTareas) // Actualiza la lista
+            }
         }
     }
 
     companion object {
         const val REQUEST_CODE_REGISTRO = 1
+        const val REQUEST_CODE_DETALLES = 2
     }
 }

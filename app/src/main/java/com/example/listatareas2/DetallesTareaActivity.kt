@@ -23,14 +23,19 @@ class DetallesTareaActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.tvCoste).text = String.format("Tiene un coste de %.2f€", tarea.coste)
 
         findViewById<Button>(R.id.btnEliminar).setOnClickListener {
-            val resultIntent = Intent().apply { putExtra("eliminarTarea", true) }
+            val resultIntent = Intent().apply {
+                putExtra("eliminarTarea", true)
+            }
             setResult(RESULT_OK, resultIntent)
             finish()
         }
 
         findViewById<Button>(R.id.btnMarcarHecha).setOnClickListener {
-            tarea.hecha = true
-            setResult(RESULT_OK, Intent())
+            tarea.hecha = true // Marca la tarea como hecha
+            val resultIntent = Intent().apply {
+                putExtra("tarea", tarea) // Devuelve la tarea modificada
+            }
+            setResult(RESULT_OK, resultIntent) // Configura el resultado
             finish()
         }
 
