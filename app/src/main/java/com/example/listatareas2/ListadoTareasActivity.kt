@@ -49,21 +49,15 @@ class ListadoTareasActivity : AppCompatActivity() {
         listViewTareas.setOnItemClickListener { _, _, position, _ ->
             val tarea = listaTareas[position]
             val intent = Intent(this, DetallesTareaActivity::class.java).apply {
-                putExtra("tareaNombre", tarea.nombre)
-                putExtra("tareaDescripcion", tarea.descripcion)
-                putExtra("tareaFecha", tarea.fecha)
-                putExtra("tareaPrioridad", tarea.prioridad)
-                putExtra("tareaCoste", tarea.coste)
-                putExtra("tareaHecha", tarea.hecha)
+                putExtra("tarea", tarea)
             }
             startActivity(intent)
         }
+
     }
 
     private fun mostrarTareas(tareas: List<Tarea>) {
-        val tareasTexto = tareas.map {
-            "${it.nombre} - ${it.descripcion} - ${it.fecha} - Prioridad: ${it.prioridad} - Coste: ${it.coste}€"
-        }
+        val tareasTexto = tareas.map { it.nombre }
         arrayAdapter.clear()
         arrayAdapter.addAll(tareasTexto)
         arrayAdapter.notifyDataSetChanged()
@@ -72,7 +66,7 @@ class ListadoTareasActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == REQUEST_CODE_REGISTRO && resultCode == Activity.RESULT_OK) {
-            val nuevaTarea = data?.getSerializableExtra("nuevaTarea") as? Tarea
+            val nuevaTarea = data?.getParcelableExtra<Tarea>("nuevaTarea")
             nuevaTarea?.let {
                 listaTareas.add(it)
                 mostrarTareas(listaTareas)

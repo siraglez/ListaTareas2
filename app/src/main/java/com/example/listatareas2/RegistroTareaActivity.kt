@@ -1,10 +1,10 @@
 package com.example.listatareas2
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class RegistroTareaActivity : AppCompatActivity() {
@@ -29,16 +29,12 @@ class RegistroTareaActivity : AppCompatActivity() {
             val prioridad = etPrioridad.text.toString()
             val coste = etCoste.text.toString().toDoubleOrNull()
 
-            if (nombre.isNotEmpty() && descripcion.isNotEmpty() && fecha.isNotEmpty() && prioridad.isNotEmpty() && coste != null) {
-                val tarea = Tarea(nombre, descripcion, fecha, prioridad, coste)
-                val resultIntent = Intent().apply {
-                    putExtra("nuevaTarea", tarea)
-                }
-                setResult(RESULT_OK, resultIntent)
-                finish()
-            } else {
-                Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
+            val nuevaTarea = Tarea(nombre, descripcion, fecha, prioridad, coste)
+            val resultIntent = Intent().apply {
+                putExtra("nuevaTarea", nuevaTarea) // Asegúrate de enviar como Parcelable
             }
+            setResult(Activity.RESULT_OK, resultIntent)
+            finish()
         }
 
         btnCancelar.setOnClickListener {
